@@ -14,6 +14,107 @@
 
 ---
 
+## 项目概览 / Project Overview
+
+**InterviewGuide** 是一个面向求职者、面试官和培训机构的智能 AI 面试平台。它将简历分析、文字与语音模拟面试、面试日程、知识库问答和多模型配置整合到一个可本地运行的应用中。
+
+**InterviewGuide** is an AI-powered interview platform for job seekers, interviewers, and training organizations. It combines resume analysis, text and voice mock interviews, interview scheduling, RAG knowledge-base Q&A, and multi-model configuration in one locally runnable application.
+
+项目采用 React + TypeScript 前端、Spring Boot 后端，并使用 PostgreSQL/pgvector、Redis 和 RustFS 提供数据、向量检索、异步任务与对象存储能力。项目支持 Docker Compose 一键启动。
+
+The project uses React + TypeScript on the frontend and Spring Boot on the backend. PostgreSQL/pgvector, Redis, and RustFS provide persistence, vector search, asynchronous jobs, and object storage. Docker Compose is supported for one-command startup.
+
+## 功能列表 / Features
+
+| 中文功能 | English Feature |
+| --- | --- |
+| 简历上传、解析、AI 分析与 PDF 报告导出 | Resume upload, parsing, AI analysis, and PDF report export |
+| 文字模拟面试、智能追问、评分与面试记录 | Text mock interviews, follow-up questions, scoring, and history |
+| 实时语音面试，支持 ASR、TTS 和 WebSocket | Real-time voice interviews with ASR, TTS, and WebSocket |
+| 面试日程、邀请信息解析、日历视图与提醒 | Interview scheduling, invitation parsing, calendar views, and reminders |
+| 知识库文档上传、分块、向量化和 RAG 问答 | Knowledge-base upload, chunking, embedding, and RAG Q&A |
+| 基于知识库生成题库并进行专项面试 | Knowledge-based question generation and focused interviews |
+| 多模型 Provider 配置与默认模型切换 | Multi-provider configuration and default model switching |
+| 浅色/深色主题与可视化系统设置 | Light/dark themes and visual system settings |
+
+## 安装步骤 / Installation
+
+### 前置条件 / Prerequisites
+
+- Windows、macOS 或 Linux / Windows, macOS, or Linux
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) with Compose / Docker Desktop（内置 Compose）
+- 阿里云百炼 API Key，或其他兼容 Provider 的 API Key / An Alibaba Cloud Bailian API Key or another compatible Provider key
+- Git（从源码获取项目时需要）/ Git (required when cloning the repository)
+
+### Docker 一键启动 / Start with Docker
+
+1. 克隆项目并进入项目目录 / Clone the repository and enter the project directory:
+
+   ```bash
+   git clone https://github.com/hanyunpeng-design/interview-guide.git
+   cd interview-guide
+   ```
+
+2. 创建环境配置文件 / Create the environment configuration file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Windows PowerShell:
+
+   ```powershell
+   Copy-Item .env.example .env
+   ```
+
+3. 编辑 `.env`，至少配置 AI Key 和加密密钥 / Set the AI key and encryption key in `.env`:
+
+   ```dotenv
+   AI_BAILIAN_API_KEY=your_api_key_here
+   APP_AI_CONFIG_ENCRYPTION_KEY=replace_with_a_long_random_secret
+   ```
+
+   不要把真实 API Key 提交到 GitHub。/ Never commit a real API key to GitHub.
+
+4. 构建并启动全部服务 / Build and start all services:
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+5. 打开前端 / Open the frontend: [http://localhost](http://localhost)
+
+主要服务地址 / Main service endpoints:
+
+| 服务 / Service | 地址 / URL |
+| --- | --- |
+| 前端 / Frontend | `http://localhost` |
+| 后端 API / Backend API | `http://localhost:8080` |
+| Swagger UI | `http://localhost:8080/swagger-ui.html` |
+| RustFS 控制台 / RustFS Console | `http://localhost:9001` |
+
+### 停止与查看状态 / Stop and Check Status
+
+```bash
+# 查看容器状态 / Check container status
+docker compose ps
+
+# 停止服务 / Stop services
+docker compose down
+
+# 重新启动（不重新构建）/ Restart without rebuilding
+docker compose up -d
+```
+
+## 使用教程 / Usage Guide
+
+1. 打开 `http://localhost`，进入「设置」并确认 Provider 已连接。/ Open `http://localhost`, go to **Settings**, and verify the selected Provider is connected.
+2. 在「简历管理」上传 PDF、DOCX、DOC 或 TXT 简历，等待 AI 分析完成。/ In **Resume Management**, upload a PDF, DOCX, DOC, or TXT resume and wait for analysis.
+3. 在「模拟面试」选择面试方向和时长，开始文字或语音面试。/ In **Mock Interview**, choose a track and duration, then start a text or voice interview.
+4. 在「知识库管理」上传资料；处理完成后进入「问答助手」选择知识库并提问。/ Upload materials in **Knowledge Base Management**, then select the processed knowledge base in **Q&A Assistant**.
+5. 在「面试记录」查看评分、优势、改进建议，并导出 PDF 报告。/ In **Interview History**, review scores and suggestions, then export a PDF report.
+6. 关闭项目执行 `docker compose down`，再次使用执行 `docker compose up -d`。/ Stop with `docker compose down` and start again with `docker compose up -d`.
+
 ## 项目介绍
 
 InterviewGuide 是一个集成了简历分析、模拟面试（文字 + 语音）、面试安排、知识库管理、知识库题库面试和多模型配置的智能面试辅助平台。系统利用大语言模型（LLM）、向量数据库、Redis Stream 异步任务和实时语音技术，为求职者、HR 和培训机构提供智能化的简历评估、面试练习、知识库问答和面试日程管理能力。
