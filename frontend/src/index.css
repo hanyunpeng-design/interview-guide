@@ -33,7 +33,7 @@
   body {
     @apply antialiased;
     font-family: var(--font-sans);
-    @apply bg-gradient-to-br from-slate-50 via-white to-indigo-50 text-slate-900;
+    @apply bg-gradient-to-br from-blue-100 via-sky-50 to-indigo-100 text-slate-900;
     @apply dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 dark:text-slate-50;
   }
 
@@ -44,6 +44,46 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     @apply font-semibold tracking-tight;
+  }
+}
+
+/* 浅色模式使用柔和蓝色基调；深色模式继续沿用原有配色。 */
+@layer components {
+  html:not(.dark) .bg-white {
+    background-color: #e5f0ff !important;
+  }
+
+  html:not(.dark) .bg-slate-50,
+  html:not(.dark) .bg-slate-50\/80 {
+    background-color: #dcecff !important;
+  }
+
+  html:not(.dark) .bg-slate-100,
+  html:not(.dark) .bg-slate-100\/80 {
+    background-color: #cfe3ff !important;
+  }
+
+  html:not(.dark) .hover\:bg-slate-50:hover {
+    background-color: #e8f4ff !important;
+  }
+
+  html:not(.dark) .hover\:bg-slate-100:hover,
+  html:not(.dark) .hover\:bg-slate-200:hover {
+    background-color: #d5e9ff !important;
+  }
+
+  html:not(.dark) .border-slate-100,
+  html:not(.dark) .border-slate-100\/50 {
+    border-color: #d9eaff !important;
+  }
+
+  html:not(.dark) .border-slate-200,
+  html:not(.dark) .border-slate-200\/50 {
+    border-color: #c4dcf5 !important;
+  }
+
+  html:not(.dark) .shadow-slate-200\/50 {
+    --tw-shadow-color: rgb(147 197 253 / 0.3) !important;
   }
 }
 
